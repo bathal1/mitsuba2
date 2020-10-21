@@ -538,7 +538,7 @@ class WriteXML:
 
         data: The dictionary to write to file.
         '''
-        from mitsuba.core import Transform4f, Point3f
+        from mitsuba.core import ScalarTransform4f, Point3f, Mesh
 
         if 'type' in data: # Scene tag
             self.open_element(data.pop('type'), {'version': '2.1.0'})
@@ -600,7 +600,7 @@ class WriteXML:
                     self.element('point', args)
                 else:
                     raise ValueError("Expected 3 values for a point. Got %d instead." % len(value))
-            elif isinstance(value, Transform4f):
+            elif isinstance(value, ScalarTransform4f):
                 # In which plugin are we adding a transform?
                 parent_plugin = self.current_tag()
                 if parent_plugin == 'sensor':
